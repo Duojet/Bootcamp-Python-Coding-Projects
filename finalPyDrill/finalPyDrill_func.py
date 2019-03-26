@@ -76,49 +76,63 @@ def searchDest(self):
 
    
 
-def findPath(self):
+def cutMove(self):
     sourcePath = self.varSource.get()
-    items = os.listdir(sourcePath)
-    itemList = []
-    for names in items:
+    destPath = self.varDest.get()
+    sourceItems = os.listdir(sourcePath)
+    destItems = os.listdir(destPath)
+    itemList1 = []
+    itemList2 = []
+    for names in sourceItems:
         abPath = os.path.join(sourcePath, names)
+        if names.endswith(".txt"):
+            itemList1.append(names)
+            print(names)
+            
+    for names in destItems:
+        abPath = os.path.join(destPath, names)
         mTime = os.path.getmtime(abPath)
         if names.endswith(".txt"):
-            itemList.append(names)
+            itemList2.append(names)
             print(names,mTime)
-
-    
-
+            
 
 
+            
+##def cutMove(self):
+##    sourcePath = self.varSource.get()
+##    items = os.listdir(sourcePath)
+##    itemList = []
+##    for names in items:
+##        abPath = os.path.join(sourcePath, names)
+##        mTime = os.path.getmtime(abPath)
+##        if names.endswith(".txt"):
+##            itemList.append(names)
+##            print(names,mTime)
 
 ##def create_db(self):
-##    conn = sqlite3.connect('db_phonebook.db')
+##    conn = sqlite3.connect('db_movedFiles.db')
 ##    with conn:
 ##        cur = conn.cursor()
-##        cur.execute("CREATE TABLE if not exists tbl_phonebook( \
+##        cur.execute("CREATE TABLE if not exists tbl_filenames( \
 ##            ID INTEGER PRIMARY KEY AUTOINCREMENT, \
-##            col_fname TEXT, \
-##            col_lname TEXT, \
-##            col_fullname TEXT, \
-##            col_phone TEXT, \
-##            col_email TEXT \
+##            col_filename TEXT, \
+##            col_modTime TEXT,
 ##            );")
-##        # you must commit() to save changes & close the database connection
 ##        conn.commit()
 ##    conn.close()
 ##    first_run(self)
 ##
 ##def first_run(self):
-##    conn = sqlite3.connect('db_phonebook.db')
+##    conn = sqlite3.connect('db_movedFiles.db')
 ##    with conn:
 ##        cur = conn.cursor()
 ##        cur,count = count_records(cur)
 ##        if count < 1:
-##            cur.execute("""INSERT INTO tbl_phonebook (col_fname,col_lname,col_fullname,col_phone,col_email) VALUES (?,?,?,?,?)""", ('John','Doe','John Doe','111-111-1111','jdoe@email.com'))
+##            cur.execute("""INSERT INTO tbl_filenames (col_filename,col_modTime,) VALUES (?,?,?,?,?)""", (names,mTime))
 ##            conn.commit()
 ##    conn.close()
-##    
+####    
 ##
 ##def count_records(cur):
 ##    count = ""

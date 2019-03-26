@@ -45,6 +45,7 @@ class ParentWindow(Frame):
 ##        self.master.protocol("WM_DELETE_WINDOW", lambda: finalPyDrill_func.ask_quit(self))
 
         self.varSource = StringVar()
+        self.varDest = StringVar()
         
         
         finalPyDrill_gui.load_gui(self)

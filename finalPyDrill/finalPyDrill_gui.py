@@ -40,7 +40,7 @@ def load_gui(self):
 
 
 
-        self.btnFindTxt = tk.Button(self.master,width=14,height=1,text="Move All .txt Files", command=lambda:  finalPyDrill_func.findPath(self))
+        self.btnFindTxt = tk.Button(self.master,width=14,height=1,text="Move All .txt Files", command=lambda:  finalPyDrill_func.cutMove(self))
         self.btnFindTxt.grid(row=5,column=0, padx=(25,25),pady=(0,25))
 
         
@@ -50,7 +50,7 @@ def load_gui(self):
 
         
 
-        self.txtDest = tk.Entry(self.master, width=70, font=("sans-serif","14"))
+        self.txtDest = tk.Entry(self.master, text=self.varDest,width=70, font=("sans-serif","14"))
         self.txtDest.grid(row=3, column=1,padx=(0,0),pady=(25,25))  
 
 
