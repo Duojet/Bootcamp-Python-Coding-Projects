@@ -34,16 +34,16 @@ def load_gui(self):
         self.btnSource.grid(row=1,column=0, padx=(25,25),pady=(25,10))
 
 
-
-        self.btnFindTxt = tk.Button(self.master,width=14,height=1,text="Locate .txt Files", command=lambda:  finalPyDrill_func.findPath(self))
-        self.btnFindTxt.grid(row=2,column=0, padx=(25,25),pady=(0,25))
-
-
         
         self.btnDest = tk.Button(self.master,width=14,height=1,text="Select Destination", command=lambda:  finalPyDrill_func.searchDest(self))
-        self.btnDest.grid(row=5,column=0, padx=(25,25),pady=(25,25))
+        self.btnDest.grid(row=3,column=0, padx=(25,25),pady=(25,25))
 
 
+
+        self.btnFindTxt = tk.Button(self.master,width=14,height=1,text="Move All .txt Files", command=lambda:  finalPyDrill_func.findPath(self))
+        self.btnFindTxt.grid(row=5,column=0, padx=(25,25),pady=(0,25))
+
+        
 
         self.txtSource = tk.Entry(self.master, text=self.varSource, width=70, font=("sans-serif","14"))
         self.txtSource.grid(row=1, column=1,padx=(0,0),pady=(25,10))
@@ -51,8 +51,7 @@ def load_gui(self):
         
 
         self.txtDest = tk.Entry(self.master, width=70, font=("sans-serif","14"))
-        self.txtDest.grid(row=5, column=1,padx=(0,0),pady=(25,25))  
-
+        self.txtDest.grid(row=3, column=1,padx=(0,0),pady=(25,25))  
 
 
 
