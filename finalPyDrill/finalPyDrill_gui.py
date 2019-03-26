@@ -50,7 +50,7 @@ def load_gui(self):
 
         
 
-        self.txtDest = tk.Entry(self.master, text=self.varDest,width=70, font=("sans-serif","14"))
+        self.txtDest = tk.Entry(self.master, text=self.varDest, width=70, font=("sans-serif","14"))
         self.txtDest.grid(row=3, column=1,padx=(0,0),pady=(25,25))  
 
 

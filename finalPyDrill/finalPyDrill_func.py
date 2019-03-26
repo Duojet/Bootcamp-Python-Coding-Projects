@@ -67,78 +67,74 @@ def searchSource(self):
     btnSource = tkFileDialog.askdirectory()
     self.txtSource.insert(END,btnSource)
 
-    
         
 def searchDest(self):
     btnDest = tkFileDialog.askdirectory()
     self.txtDest.insert(END,btnDest)
+
  
-
-   
-
 def cutMove(self):
     sourcePath = self.varSource.get()
     destPath = self.varDest.get()
     sourceItems = os.listdir(sourcePath)
-    destItems = os.listdir(destPath)
-    itemList1 = []
-    itemList2 = []
-    for names in sourceItems:
-        abPath = os.path.join(sourcePath, names)
-        if names.endswith(".txt"):
-            itemList1.append(names)
-            print(names)
+    for files in sourceItems:
+        if files.endswith(".txt"):
+            abPath = os.path.join(sourcePath, files)
+            shutil.move(abPath, destPath)
             
-    for names in destItems:
-        abPath = os.path.join(destPath, names)
-        mTime = os.path.getmtime(abPath)
+    movedItems = os.listdir(destPath)
+    itemList = []
+    for names in movedItems:
+        abPath2 = os.path.join(destPath, names)
+        mTime = os.path.getmtime(abPath2)
         if names.endswith(".txt"):
-            itemList2.append(names)
+            itemList.append(names)
             print(names,mTime)
+            create_db(self)
             
 
+def create_db(self):
+    conn = sqlite3.connect('db_movedFiles.db')
+    with conn:
+        cur = conn.cursor()
+        cur.execute("""CREATE TABLE if not exists tbl_filenames(ID INTEGER PRIMARY KEY AUTOINCREMENT, col_filename TEXT, col_modTime TEXT);""")
+        conn.commit()
+    conn.close()
 
-            
-##def cutMove(self):
-##    sourcePath = self.varSource.get()
-##    items = os.listdir(sourcePath)
-##    itemList = []
-##    for names in items:
-##        abPath = os.path.join(sourcePath, names)
-##        mTime = os.path.getmtime(abPath)
-##        if names.endswith(".txt"):
-##            itemList.append(names)
-##            print(names,mTime)
 
-##def create_db(self):
-##    conn = sqlite3.connect('db_movedFiles.db')
-##    with conn:
-##        cur = conn.cursor()
-##        cur.execute("CREATE TABLE if not exists tbl_filenames( \
-##            ID INTEGER PRIMARY KEY AUTOINCREMENT, \
-##            col_filename TEXT, \
-##            col_modTime TEXT,
-##            );")
-##        conn.commit()
-##    conn.close()
+    
 ##    first_run(self)
 ##
 ##def first_run(self):
+##    names = cutMove(self)
+##    mTime = cutMove(self)
 ##    conn = sqlite3.connect('db_movedFiles.db')
 ##    with conn:
 ##        cur = conn.cursor()
 ##        cur,count = count_records(cur)
 ##        if count < 1:
-##            cur.execute("""INSERT INTO tbl_filenames (col_filename,col_modTime,) VALUES (?,?,?,?,?)""", (names,mTime))
+##            cur.execute("""INSERT INTO tbl_filenames (col_filename,col_modTime) VALUES (?,?)""", (names,mTime))
 ##            conn.commit()
 ##    conn.close()
-####    
-##
+
+
+
 ##def count_records(cur):
 ##    count = ""
-##    cur.execute("""SELECT COUNT(*) FROM tbl_phonebook""")
+##    cur.execute("""SELECT COUNT(*) FROM tbl_filenames""")
 ##    count = cur.fetchone()[0]
 ##    return cur,count
+##
+##
+
+
+
+
+
+    
+##    
+##
+
 ##
 ###select item in ListBox
 ##def onSelect(self,event):
