@@ -124,14 +124,21 @@ def create_db(self):
 ##    db_contents
 
 
-
-
 def db_contents(self):
     conn = sqlite3.connect('db_movedFiles.db')
-    with conn:
-        cur = conn.cursor()
-        for items in cur.execute("SELECT (*) FROM tbl_filenames"):
-            print(items)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tbl_filenames")
+    items = cur.fetchall()
+    for item in items:
+        print(items)
+
+
+##def db_contents(self):
+##    conn = sqlite3.connect('db_movedFiles.db')
+##    with conn:
+##        cur = conn.cursor()
+##        for items in cur.execute("SELECT (*) FROM tbl_filenames"):
+##            print(items)
 
 
 
