@@ -98,7 +98,7 @@ def cutMove(self):
             cur.execute("""INSERT INTO tbl_filenames (col_filename,col_modTime) VALUES (?,?)""", (names, mTime))
             conn.commit()
     conn.close()
-    db_contents(self)                
+##    db_contents                
 
 def create_db(self):
     conn = sqlite3.connect('db_movedFiles.db')
@@ -126,12 +126,12 @@ def create_db(self):
 
 
 
-def db_contents(self):
-    conn = sqlite3.connect('db_movedFiles.db')
-    with conn:
-        cur = conn.cursor()
-        for items in cur.execute("SELECT (*) FROM tbl_filenames"):
-            print(items)
+##def db_contents(self):
+##    conn = sqlite3.connect('db_movedFiles.db')
+##    with conn:
+##        cur = conn.cursor()
+##        for items in cur.execute("SELECT (*) FROM tbl_filenames"):
+##            print(items)
 
 
 
