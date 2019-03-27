@@ -89,7 +89,7 @@ def cutMove(self):
         mTime = os.path.getmtime(abPath2)
         if names.endswith(".txt"):
             itemList.append(names)
-            print(names,mTime)
+##            print(names,mTime)
             create_db(self)
             
 
@@ -100,67 +100,32 @@ def create_db(self):
         cur.execute("""CREATE TABLE if not exists tbl_filenames(ID INTEGER PRIMARY KEY AUTOINCREMENT, col_filename TEXT, col_modTime TEXT);""")
         conn.commit()
     conn.close()
+    populate_db(self)
 
 
-    
-##    first_run(self)
+def populate_db(self):
+    names, mTime = cutMove(self)
+    conn = sqlite3.connect('db_movedFiles.db')
+    with conn:
+        cur = conn.cursor()
+            cur.execute("""INSERT INTO tbl_filenames (col_filename,col_modTime) VALUES (?,?)""", (names, mTime))
+            conn.commit()
+    conn.close()
+
 ##
-##def first_run(self):
-##    names = cutMove(self)
-##    mTime = cutMove(self)
-##    conn = sqlite3.connect('db_movedFiles.db')
-##    with conn:
-##        cur = conn.cursor()
-##        cur,count = count_records(cur)
-##        if count < 1:
-##            cur.execute("""INSERT INTO tbl_filenames (col_filename,col_modTime) VALUES (?,?)""", (names,mTime))
-##            conn.commit()
-##    conn.close()
-
-
-
 ##def count_records(cur):
 ##    count = ""
 ##    cur.execute("""SELECT COUNT(*) FROM tbl_filenames""")
 ##    count = cur.fetchone()[0]
 ##    return cur,count
 ##
-##
 
-
-
-
-
-    
-##    
-##
-
-##
-###select item in ListBox
-##def onSelect(self,event):
-##    #calling the event is the self.lstList1 widget
-##    varList = event.widget
-##    select = varList.curselection()[0]
-##    value = varList.get(select)
-##    conn = sqlite3.connect('db_phonebook.db')
-##    with conn:
-##        cursor = conn.cursor()
-##        cursor.execute("""SELECT col_fname,col_lname,col_phone,col_email FROM tbl_phonebook WHERE col_fullname = (?)""", [value])
-##        varBody = cursor.fetchall()
-##        #  This returns a tuple and we can slice it into 4 parts using data[] during the iteration
-##        for data in varBody:
-##            self.txt_fname.delete(0,END)
-##            self.txt_fname.insert(0,data[0])
-##            self.txt_lname.delete(0,END)
-##            self.txt_lname.insert(0,data[1])
-##            self.txt_phone.delete(0,END)
-##            self.txt_phone.insert(0,data[2])
-##            self.txt_email.delete(0,END)
-##            self.txt_email.insert(0,data[3])
-##
-
-
-
+def db_contents(self)
+    conn = sqlite3.connect('db_movedFiles.db')
+    with conn:
+        cur = conn.cursor()
+        for items in cur.execute("SELECT col_filename,col_modTime FROM tbl_filenames"):
+            print(items)
 
 
 
