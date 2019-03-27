@@ -42,7 +42,7 @@ class ParentWindow(Frame):
         self.master.geometry('{}x{}'.format(1000,400))
         finalPyDrill_func.center_window(self,1000,400)
         self.master.title("Final Python Drill")
-##        self.master.protocol("WM_DELETE_WINDOW", lambda: finalPyDrill_func.ask_quit(self))
+        self.master.protocol("WM_DELETE_WINDOW", lambda: finalPyDrill_func.ask_quit(self))
 
         self.varSource = StringVar()
         self.varDest = StringVar()

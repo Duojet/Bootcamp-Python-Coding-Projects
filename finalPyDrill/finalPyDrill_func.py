@@ -51,11 +51,11 @@ def center_window(self, w, h):  # pass in the tkinter frame (master) reference a
     return centerGeo
 
 # catch if the user clicks on the window's upper-right "X" to ensure they want to close
-##def ask_quit(self):
-##    if messagebox.askokcancel("Exit program", "Okay to exit application??"):        
-##        # this closes app
-##        self.master.destroy()
-##        os._exit(0)
+def ask_quit(self):
+    if messagebox.askokcancel("Exit program", "Okay to exit application??"):        
+        # this closes app
+        self.master.destroy()
+        os._exit(0)
 
 
 #==========================================================
